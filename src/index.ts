@@ -2,14 +2,14 @@ import express from 'express';
 import cors from 'cors';
 
 const PORT = process.env.PORT || 3001;
-
 const app = express();
 
-app.get('/', (req,res) => {
-    res.send("Hello World!")
-});
+// Import routes
+import emailRoutes from './routes/email';
 
 app.use(cors());
+
+app.use('/api', emailRoutes);
 
 app.listen(PORT, () => {
     console.log(`Server running in port ${PORT}`);
