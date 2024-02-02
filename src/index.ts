@@ -5,7 +5,7 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 
 // Import routes
-import emailRoutes from './routes/email';
+import emailRoutes from './routes/emailRoute';
 
 app.use(cors());
 
