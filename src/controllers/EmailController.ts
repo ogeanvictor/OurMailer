@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
 
-import { EmailService } from '../services/EmailService';
+import EmailService from '../services/EmailService';
 
 class EmailController {
     private emailService:EmailService;
