@@ -12,7 +12,7 @@ class EmailController {
 
     async sendEmail(req:Request, res:Response):Promise<void> {
         try {
-            const email = await EmailService.sendEmail(req.body);
+            const email = await this.emailService.sendEmail(req.body);
             res.status(StatusCodes.OK).send(email);
         } catch (error) {
             res.status(StatusCodes.BAD_REQUEST).send(error);
