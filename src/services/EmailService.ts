@@ -3,11 +3,13 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-class EmailService {
-    constructor(public to?:string, public subject?:string, public message?:string) {
+interface emailBody {
+    to: string,
+    subject: string,
+    message: string
+}
 
-    }
-    
+class EmailService {
     createTransporter() {
         const transport = nodemailer.createTransport({
             service: "gmail",
@@ -21,12 +23,12 @@ class EmailService {
     }
    
 
-    async sendEmail() {
+    async sendEmail(emailBody:emailBody) {
         const mailOptions = {
             from: process.env.EMAIL_USER,
-            to: this.to,
-            subject: this.subject,
-            html: this.message
+            to: emailBody.to,
+            subject: emailBody.subject,
+            html: emailBody.message
         };
 
         const emails = await this.createTransporter().sendMail(mailOptions);
