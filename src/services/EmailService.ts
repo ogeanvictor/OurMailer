@@ -4,18 +4,23 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 interface emailBody {
+    host: string,
+    user: string,
+    pass: string,
     to: string,
     subject: string,
     message: string
 }
 
 class EmailService {
-    createTransporter() {
+    createTransporter(host: string, user: string, pass: string) {
         const transport = nodemailer.createTransport({
-            service: "gmail",
+            host: host,
+            port: 465,
+            secure: true,
             auth: {
-                user: process.env.EMAIL_USER,
-                pass: process.env.PASS_USER
+                user: user,
+                pass: pass
             }
         });
 
@@ -25,15 +30,15 @@ class EmailService {
 
     async sendEmail(emailBody:emailBody) {
         const mailOptions = {
-            from: process.env.EMAIL_USER,
+            from: emailBody.user,
             to: emailBody.to,
             subject: emailBody.subject,
             html: emailBody.message
         };
 
-        const emails = await this.createTransporter().sendMail(mailOptions);
+        const emails = await this.createTransporter(emailBody.host, emailBody.user, emailBody.pass).sendMail(mailOptions);
 
-        console.log("Message sent: ", emails.messageId);
+        console.log("Message sent: ", emails);
     }
 }
 
