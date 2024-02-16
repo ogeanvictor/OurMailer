@@ -8,7 +8,7 @@ interface emailBody {
     port: number,
     user: string,
     pass: string,
-    to: string,
+    to: string[],
     subject: string,
     message: string
 }
