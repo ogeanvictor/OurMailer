@@ -25,6 +25,11 @@ class EmailService {
             }
         });
 
+        transport.verify(function (error, success) {
+            if (error) return error;
+            else return success;
+        });
+
         return transport;
     }
    
