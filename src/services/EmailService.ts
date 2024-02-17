@@ -6,6 +6,7 @@ dotenv.config();
 interface emailBody {
     host: string,
     port: number,
+    secure: boolean,
     user: string,
     pass: string,
     to: string[],
@@ -14,11 +15,11 @@ interface emailBody {
 }
 
 class EmailService {
-    createTransporter(host: string, port: number, user: string, pass: string) {
+    createTransporter(host: string, port: number, secure: boolean, user: string, pass: string) {
         const transport = nodemailer.createTransport({
             host: host,
             port: port,
-            secure: true,
+            secure: secure,
             auth: {
                 user: user,
                 pass: pass
@@ -42,7 +43,7 @@ class EmailService {
             html: emailBody.message
         };
 
-        const emails = await this.createTransporter(emailBody.host, emailBody.port, emailBody.user, emailBody.pass).sendMail(mailOptions);
+        const emails = await this.createTransporter(emailBody.host, emailBody.port, emailBody.secure, emailBody.user, emailBody.pass).sendMail(mailOptions);
 
         console.log("Message sent: ", emails);
     }
