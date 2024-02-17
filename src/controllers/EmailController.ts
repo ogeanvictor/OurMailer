@@ -18,6 +18,15 @@ class EmailController {
             res.status(StatusCodes.BAD_REQUEST).send(error);
         }
     }
+
+    async createTransport(req:Request, res:Response):Promise<void> {
+        try {
+            const transporter = await this.emailService.createTransporter(req.body);
+            res.status(StatusCodes.OK).send(transporter);
+        } catch (error) {
+            res.status(StatusCodes.BAD_REQUEST).send(error);
+        }
+    }
 }
 
 export default EmailController;
