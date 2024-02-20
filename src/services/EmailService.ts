@@ -54,7 +54,7 @@ class EmailService {
     }
 
     async convertFile(file:any) {
-        const tempPath = path.join(__dirname, "./tmp");
+        const tempPath = path.join(__dirname, "../tmp/");
         const buffer = Buffer.from(file);
         const csvArray: any[] = [];
     
