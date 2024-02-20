@@ -9,7 +9,7 @@ interface emailBody {
     secure: boolean,
     user: string,
     pass: string,
-    to: string[],
+    to: File | Blob | string[],
     subject: string,
     message: string
 }
@@ -48,7 +48,7 @@ class EmailService {
         console.log("Message sent: ", emails);
     }
 
-    async convertFile(file:FormData) {
+    async convertFile(file:File) {
         
     }
 }
