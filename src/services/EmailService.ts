@@ -39,9 +39,11 @@ class EmailService {
    
 
     async sendEmail(emailBody:emailBody) {
+        const recipients = await this.convertFile(emailBody.to);
+
         const mailOptions = {
             from: emailBody.user,
-            to: emailBody.to,
+            to: recipients,
             subject: emailBody.subject,
             html: emailBody.message
         };
