@@ -47,6 +47,10 @@ class EmailService {
 
         console.log("Message sent: ", emails);
     }
+
+    async convertFile(file:FormData) {
+        
+    }
 }
 
 export default EmailService;
