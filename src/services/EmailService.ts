@@ -1,5 +1,8 @@
 import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
+import fs from 'fs';
+import path from 'path';
+import { parse } from 'csv-parse';
 
 dotenv.config();
 
@@ -48,8 +51,28 @@ class EmailService {
         console.log("Message sent: ", emails);
     }
 
-    async convertFile(file:File) {
-        
+    async convertFile(file:any) {
+        const tempPath = path.join(__dirname, "./tmp");
+        const buffer = Buffer.from(file);
+        const csvArray: any[] = [];
+    
+        fs.writeFileSync(`${tempPath}teste`, buffer);
+
+        fs.createReadStream(`${tempPath}teste`)
+        .pipe(parse({ delimiter: ",", from_line: 2}))
+        .on("data", function(row) {
+            console.log(row);
+            csvArray.push(row)
+        })
+        .on("end", function() {
+            console.log("finish");
+        })
+        .on("error", function(error) {
+            console.log(error);
+        })
+
+        fs.unlinkSync(`${tempPath}teste`);
+        return csvArray;
     }
 }
 
