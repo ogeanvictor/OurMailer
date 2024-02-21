@@ -1,12 +1,31 @@
+import axios from 'axios';
 import './App.css'
+import { useForm } from 'react-hook-form';
+
+interface FormData {
+  host: string,
+  port: number,
+  secure: boolean,
+  user: string,
+  pass: string,
+  to: File | Blob | string[],
+  subject: string,
+  message: string
+}
 
 function App() {
+  const { register, handleSubmit } = useForm<FormData>();
+
+  const onSubmit = (data: FormData) => {
+    console.log(data)
+    axios.post("http://localhost:3001/api/sendEmail", data)
+  }
 
   return (
     <>
-      <form>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <label htmlFor="host">Host</label>
-        <input type="text" name="host" id="host" />
+        <input {...register("host")} />
 
         <label htmlFor="port">Porta</label>
         <select name="port" id="port">
@@ -15,19 +34,19 @@ function App() {
         </select>
 
         <label htmlFor="user">User</label>
-        <input type="text" name="user" id="user" />
+        <input {...register("user")} />
 
-        <label htmlFor="password">Senha</label>
-        <input type="text" name="password" id="password" />
+        <label htmlFor="pass">Senha</label>
+        <input {...register("pass")} />
 
-        <label htmlFor="recipients">Destinatários</label>
-        <input type="file" name="recipients" id="recipients"/>
+        <label htmlFor="to">Destinatários</label>
+        <input type='file' {...register("to")} />
 
         <label htmlFor="subject">Assunto</label>
-        <input type="text" name="subject" id="subject"/>
+        <input {...register("subject")} />
 
         <label htmlFor="message">Mensagem</label>
-        <input type="text" name="message" id="message" />
+        <input {...register("message")} />
 
         <input type="submit" value="Submit" />
       </form>
