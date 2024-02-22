@@ -2,7 +2,7 @@ import axios from 'axios';
 import './App.css'
 import { useForm } from 'react-hook-form';
 
-interface FormData {
+interface FormTypes {
   host: string,
   port: number,
   secure: boolean,
@@ -14,9 +14,9 @@ interface FormData {
 }
 
 function App() {
-  const { register, handleSubmit } = useForm<FormData>();
+  const { register, handleSubmit } = useForm<FormTypes>();
 
-  const onSubmit = (data: FormData) => {
+  const onSubmit = (data: FormTypes) => {
     console.log(data)
     axios.post("http://localhost:3001/api/sendEmail", data)
   }
