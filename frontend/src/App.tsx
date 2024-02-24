@@ -8,7 +8,7 @@ interface FormTypes {
   secure: boolean,
   user: string,
   pass: string,
-  to: File | Blob | string[],
+  to: any,
   subject: string,
   message: string
 }
@@ -16,8 +16,19 @@ interface FormTypes {
 function App() {
   const { register, handleSubmit } = useForm<FormTypes>();
 
+  const fileReader = new FileReader();
+
   const onSubmit = (data: FormTypes) => {
-    console.log(data)
+    if (data.to) {
+      fileReader.onload = function () {
+        const file = data.to[0];
+      }
+  
+      fileReader.readAsText(data.to[0])
+    }
+
+    data.to = fileReader;
+
     axios.post("http://localhost:3001/api/sendEmail", data)
   }
 
