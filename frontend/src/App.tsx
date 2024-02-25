@@ -19,7 +19,9 @@ function App() {
   const fileReader = new FileReader();
 
   const onSubmit = (data: FormTypes) => {
-    data.port == 465 ? data.secure = true : data.secure = false
+    data.port = Number(data.port)
+    data.port == 465 ? data.secure = true : data.secure = false;
+    
     if (data.to) {
       fileReader.onload = function () {
         const file = data.to[0];
@@ -43,7 +45,7 @@ function App() {
         <input {...register("host")} />
 
         <label htmlFor="port">Porta</label>
-        <select name="port" id="port">
+        <select {...register("port")} defaultValue={465}>
           <option value={465}>465</option>
           <option value={587}>587</option>
         </select>
