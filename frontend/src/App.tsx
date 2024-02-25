@@ -19,6 +19,7 @@ function App() {
   const fileReader = new FileReader();
 
   const onSubmit = (data: FormTypes) => {
+    data.port == 465 ? data.secure = true : data.secure = false
     if (data.to) {
       fileReader.onload = function () {
         const file = data.to[0];
@@ -29,7 +30,10 @@ function App() {
 
     data.to = fileReader;
 
+    console.log(data)
     axios.post("http://localhost:3001/api/sendEmail", data)
+    
+
   }
 
   return (
@@ -40,8 +44,8 @@ function App() {
 
         <label htmlFor="port">Porta</label>
         <select name="port" id="port">
-          <option value="465">465</option>
-          <option value="587">587</option>
+          <option value={465}>465</option>
+          <option value={587}>587</option>
         </select>
 
         <label htmlFor="user">User</label>
