@@ -21,8 +21,11 @@ class EmailController {
 
     async uploadFile(req:Request, res:Response):Promise<void> {
         try {
-            const file = await this.emailService.uploadFile(req.file);
-            res.status(StatusCodes.OK).send(file);
+            if (req.file) {
+                const file = await this.emailService.uploadFile(req.file);
+                res.status(StatusCodes.OK).send(file);
+            }
+           
         } catch (error) {
             res.status(StatusCodes.BAD_REQUEST).send(error);
         }

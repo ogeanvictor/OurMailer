@@ -76,6 +76,14 @@ class EmailService {
         fs.unlinkSync(`${tempPath}teste`);
         return csvArray;
     }
+
+    async uploadFile(file: Express.Multer.File) {
+        const tempPath = path.join(__dirname, "../tmp/");
+    
+        fs.writeFileSync(`${tempPath}teste`, file.buffer);
+
+        return 'File saved!'
+    }
 }
 
 export default EmailService;
