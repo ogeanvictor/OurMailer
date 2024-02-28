@@ -17,6 +17,8 @@ interface emailBody {
     message: string
 }
 
+const tempPath = path.join(__dirname, "../tmp/");
+
 class EmailService {
     createTransporter(host: string, port: number, secure: boolean, user: string, pass: string) {
         const transport = nodemailer.createTransport({
@@ -39,7 +41,7 @@ class EmailService {
    
 
     async sendEmail(emailBody:emailBody) {
-        const recipients = await this.convertFile(emailBody.to);
+        const recipients = await this.convertFile();
 
         const mailOptions = {
             from: emailBody.user,
@@ -53,12 +55,8 @@ class EmailService {
         console.log("Message sent: ", emails);
     }
 
-    async convertFile(file:any) {
-        const tempPath = path.join(__dirname, "../tmp/");
-        const buffer = Buffer.from(file);
-        const csvArray: any[] = [];
-    
-        fs.writeFileSync(`${tempPath}teste`, buffer);
+    async convertFile() {
+        const csvArray: string[] = [];
 
         fs.createReadStream(`${tempPath}teste`)
         .pipe(parse({ delimiter: ",", from_line: 2}))
@@ -78,10 +76,7 @@ class EmailService {
     }
 
     async uploadFile(file: Express.Multer.File) {
-        const tempPath = path.join(__dirname, "../tmp/");
-    
         fs.writeFileSync(`${tempPath}teste`, file.buffer);
-
         return 'File saved!'
     }
 }
