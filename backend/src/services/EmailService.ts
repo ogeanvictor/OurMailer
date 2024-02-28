@@ -38,7 +38,6 @@ class EmailService {
 
         return transport;
     }
-   
 
     async sendEmail(emailBody:emailBody) {
         const recipients = await this.convertFile();
@@ -58,7 +57,7 @@ class EmailService {
     async convertFile() {
         const csvArray: string[] = [];
 
-        fs.createReadStream(`${tempPath}teste`)
+        fs.createReadStream(`${tempPath}recipients.csv`)
         .pipe(parse({ delimiter: ",", from_line: 2}))
         .on("data", function(row) {
             console.log(row);
@@ -76,7 +75,7 @@ class EmailService {
     }
 
     async uploadFile(file: Express.Multer.File) {
-        fs.writeFileSync(`${tempPath}teste`, file.buffer);
+        fs.writeFileSync(`${tempPath}recipients.csv`, file.buffer);
         return 'File saved!'
     }
 }

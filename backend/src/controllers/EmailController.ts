@@ -25,7 +25,6 @@ class EmailController {
                 const file = await this.emailService.uploadFile(req.file);
                 res.status(StatusCodes.OK).send(file);
             }
-           
         } catch (error) {
             res.status(StatusCodes.BAD_REQUEST).send(error);
         }
