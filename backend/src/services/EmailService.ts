@@ -12,7 +12,7 @@ interface emailBody {
     secure: boolean,
     user: string,
     pass: string,
-    to: File | Blob | string[],
+    to: any,
     subject: string,
     message: string
 }
@@ -41,6 +41,7 @@ class EmailService {
 
     async sendEmail(emailBody:emailBody) {
         const recipients = await this.convertFile();
+        console.log(recipients)
 
         const mailOptions = {
             from: emailBody.user,
@@ -70,7 +71,8 @@ class EmailService {
             console.log(error);
         })
 
-        fs.unlinkSync(`${tempPath}teste`);
+        console.log(csvArray)
+        fs.unlinkSync(`${tempPath}recipients.csv`);
         return csvArray;
     }
 

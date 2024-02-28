@@ -16,26 +16,16 @@ interface FormTypes {
 function App() {
   const { register, handleSubmit } = useForm<FormTypes>();
 
-  const fileReader = new FileReader();
+  const formData = new FormData();
 
   const onSubmit = (data: FormTypes) => {
     data.port = Number(data.port)
     data.port == 465 ? data.secure = true : data.secure = false;
     
-    if (data.to) {
-      fileReader.onload = function () {
-        const file = data.to[0];
-      }
-  
-      fileReader.readAsText(data.to[0])
-    }
-
-    data.to = fileReader;
-
-    console.log(data)
-    axios.post("http://localhost:3001/api/sendEmail", data)
-    
-
+    formData.append("file", data.to);
+    console.log("formDat",formData)
+    axios.post("http://localhost:3001/api/uploadFile", formData, {headers: {'Content-Type': 'multipart/form-data'}});
+    axios.post("http://localhost:3001/api/sendEmail", data);
   }
 
   return (
