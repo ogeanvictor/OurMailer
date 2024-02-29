@@ -1,6 +1,7 @@
 import axios from 'axios';
 import './App.css'
 import { useForm } from 'react-hook-form';
+import { useState } from 'react';
 
 interface FormTypes {
   host: string,
@@ -15,6 +16,13 @@ interface FormTypes {
 
 function App() {
   const { register, handleSubmit } = useForm<FormTypes>();
+  const [file, setFile] = useState<File | null>(null);
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      setFile(e.target.files[0]);
+    }
+  }
 
   const formData = new FormData();
 
@@ -22,9 +30,7 @@ function App() {
     data.port = Number(data.port)
     data.port == 465 ? data.secure = true : data.secure = false;
     
-    formData.append("file", data.to);
-    console.log("formDat",formData)
-    axios.post("http://localhost:3001/api/uploadFile", formData, {headers: {'Content-Type': 'multipart/form-data'}});
+    axios.post("http://localhost:3001/api/uploadFile", formData);
     axios.post("http://localhost:3001/api/sendEmail", data);
   }
 
@@ -47,7 +53,7 @@ function App() {
         <input {...register("pass")} />
 
         <label htmlFor="to">Destinatários</label>
-        <input type='file' {...register("to")} />
+        <input type='file' {...register("to")} onChange={handleFileChange} />
 
         <label htmlFor="subject">Assunto</label>
         <input {...register("subject")} />
