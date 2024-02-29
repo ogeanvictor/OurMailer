@@ -24,13 +24,24 @@ function App() {
     }
   }
 
-  const formData = new FormData();
-
-  const onSubmit = (data: FormTypes) => {
+  const onSubmit = async (data: FormTypes) => {
     data.port = Number(data.port)
     data.port == 465 ? data.secure = true : data.secure = false;
     
-    axios.post("http://localhost:3001/api/uploadFile", formData);
+    if (file) {
+      const formData = new FormData();
+      formData.append("file", file);
+
+      try {
+        await fetch("http://localhost:3001/api/uploadFile", {
+          method: "POST",
+          body: formData
+        })
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
     axios.post("http://localhost:3001/api/sendEmail", data);
   }
 
