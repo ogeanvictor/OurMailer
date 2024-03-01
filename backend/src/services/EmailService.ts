@@ -40,7 +40,7 @@ class EmailService {
     }
 
     async sendEmail(emailBody:emailBody) {
-        const recipients = await this.convertFile();
+        const recipients:string[] = await this.convertFile();
         console.log(recipients)
 
         const mailOptions = {
@@ -59,9 +59,9 @@ class EmailService {
         const csvArray: string[] = [];
 
         fs.createReadStream(`${tempPath}recipients.csv`)
-        .pipe(parse({ delimiter: ",", from_line: 2}))
+        .pipe(parse({ delimiter: ",", from_line: 1}))
         .on("data", function(row) {
-            console.log(row);
+            console.log("row", row);
             csvArray.push(row)
         })
         .on("end", function() {
