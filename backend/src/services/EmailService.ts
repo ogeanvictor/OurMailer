@@ -53,6 +53,7 @@ class EmailService {
         const emails = await this.createTransporter(emailBody.host, emailBody.port, emailBody.secure, emailBody.user, emailBody.pass).sendMail(mailOptions);
 
         console.log("Message sent: ", emails);
+        await this.deleteFile();
     }
 
     async convertFile() {
@@ -61,7 +62,6 @@ class EmailService {
         fs.createReadStream(`${tempPath}recipients.csv`)
         .pipe(parse({ delimiter: ",", from_line: 1}))
         .on("data", function(row) {
-            console.log("row", row);
             csvArray.push(row)
         })
         .on("end", function() {
@@ -71,14 +71,16 @@ class EmailService {
             console.log(error);
         })
 
-        console.log(csvArray)
-        fs.unlinkSync(`${tempPath}recipients.csv`);
         return csvArray;
     }
 
     async uploadFile(file: Express.Multer.File) {
         fs.writeFileSync(`${tempPath}recipients.csv`, file.buffer);
         return 'File saved!'
+    }
+
+    async deleteFile() {
+        fs.unlinkSync(`${tempPath}recipients.csv`);
     }
 }
 
