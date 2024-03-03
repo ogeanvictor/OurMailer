@@ -36,12 +36,12 @@ function Form() {
           method: "POST",
           body: formData
         })
+
+        await axios.post("http://localhost:3001/api/sendEmail", data);
       } catch (error) {
         console.error(error)
       }
     }
-
-    axios.post("http://localhost:3001/api/sendEmail", data);
   }
 
   return (
