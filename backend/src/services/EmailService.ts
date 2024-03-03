@@ -12,7 +12,7 @@ interface emailBody {
     secure: boolean,
     user: string,
     pass: string,
-    to: any,
+    to: string[],
     subject: string,
     message: string
 }
