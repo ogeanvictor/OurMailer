@@ -52,8 +52,8 @@ class EmailService {
 
         const emails = await this.createTransporter(emailBody.host, emailBody.port, emailBody.secure, emailBody.user, emailBody.pass).sendMail(mailOptions);
 
-        console.log("Message sent: ", emails);
         await this.deleteFile();
+        return `Message sent to: ${emails.envelope.to}`;
     }
 
     async convertFile() {
