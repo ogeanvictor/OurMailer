@@ -16,6 +16,8 @@ interface FormTypes {
 function Form() {
   const { register, handleSubmit } = useForm<FormTypes>();
   const [file, setFile] = useState<File | null>(null);
+  const [senders, setSenders] = useState<string[]>();
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -24,6 +26,7 @@ function Form() {
   }
 
   const onSubmit = async (data: FormTypes) => {
+    setLoading(true);
     data.port = Number(data.port)
     data.port == 465 ? data.secure = true : data.secure = false;
     
@@ -37,7 +40,10 @@ function Form() {
           body: formData
         })
 
-        await axios.post("http://localhost:3001/api/sendEmail", data);
+        await axios.post("http://localhost:3001/api/sendEmail", data).then((response) => {
+          setSenders(response.data);
+          setLoading(false);
+        });
       } catch (error) {
         console.error(error)
       }
@@ -73,6 +79,15 @@ function Form() {
 
         <input type="submit" value="Submit" />
       </form>
+
+      {loading ? (
+        <p>
+          Enviando emails ...
+        </p> 
+        ) : (
+          <p>{senders}</p>
+        )
+      }
     </>
   )
 }
