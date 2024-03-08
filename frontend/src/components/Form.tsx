@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
+import './Form.css';
 
 interface FormTypes {
   host: string,
@@ -52,30 +53,48 @@ function Form() {
 
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <label htmlFor="host">Host</label>
-        <input {...register("host")} />
+      <form className='form' onSubmit={handleSubmit(onSubmit)}>
 
-        <label htmlFor="port">Porta</label>
-        <select {...register("port")} defaultValue={465}>
-          <option value={465}>465</option>
-          <option value={587}>587</option>
-        </select>
+        <div className='sections'>
+          <div className='box'>
+            <label htmlFor="host">Host</label>
+            <input {...register("host")} />
+          </div>
 
-        <label htmlFor="user">User</label>
-        <input {...register("user")} />
+          <div className='box'>
+          <label htmlFor="port">Porta</label>
+          <select {...register("port")} defaultValue={465}>
+            <option value={465}>465</option>
+            <option value={587}>587</option>
+          </select>
+          </div>
 
-        <label htmlFor="pass">Senha</label>
-        <input {...register("pass")} />
+          <div className='box'>
+            <label htmlFor="user">User</label>
+            <input {...register("user")} />
+          </div>
 
-        <label htmlFor="to">Destinatários</label>
-        <input type='file' {...register("to")} onChange={handleFileChange} />
+          <div className='box'>
+            <label htmlFor="pass">Senha</label>
+            <input {...register("pass")} />
+          </div>
+        </div>
 
-        <label htmlFor="subject">Assunto</label>
-        <input {...register("subject")} />
-
-        <label htmlFor="message">Mensagem</label>
-        <input {...register("message")} />
+        <div className='box'>
+          <label htmlFor="to">Destinatários</label>
+          <input type='file' {...register("to")} onChange={handleFileChange} />
+        </div>
+        
+        <div className='box'>
+          <label htmlFor="subject">Assunto</label>
+          <input {...register("subject")} />
+        </div>
+        
+        <div className='box'>
+          <label htmlFor="message">Mensagem</label>
+          <input {...register("message")} />
+        </div>
+        
 
         <input type="submit" value="Submit" />
       </form>
