@@ -88,7 +88,7 @@ function Form() {
         <div className='subtitles'>
           <h2>Conteúdo</h2>
         </div>
-        
+
         <div className='content'>
           <div className='box'>
             <label htmlFor="to">Destinatários: </label>
@@ -108,7 +108,7 @@ function Form() {
           </div>
         </div>
         
-        <input type="submit" value="Submit" />
+        <input className='button' type="submit" value="Enviar" />
       </form>
 
       {loading ? (

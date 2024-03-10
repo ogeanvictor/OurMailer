@@ -79,3 +79,22 @@ h1 {
     width: 100%;
     display: flex;
 }
+
+.button {
+    display: flex;
+    font-size: medium;
+    border: none;
+    border-radius: 0.375rem;
+    justify-content: center;
+    line-height: 1rem;
+    transition-duration: 500ms;
+    cursor: pointer;
+    background-color: #20DF7F;
+    width: 30%;
+    height: 3rem;
+}
+
+.button:hover {
+    background-color: #19B366;
+    color: white;
+}
