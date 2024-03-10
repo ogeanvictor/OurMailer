@@ -55,47 +55,52 @@ function Form() {
     <>
       <form className='form' onSubmit={handleSubmit(onSubmit)}>
 
-        <div className='sections'>
+        <h2>Configuração</h2>
+        <div className='configs'>
           <div className='box'>
-            <label htmlFor="host">Host</label>
-            <input {...register("host")} />
+            <label htmlFor="host">Host: </label>
+            <input className='input' {...register("host")} placeholder='Host' />
           </div>
 
           <div className='box'>
-          <label htmlFor="port">Porta</label>
-          <select {...register("port")} defaultValue={465}>
+          <label htmlFor="port">Porta: </label>
+          <select id='port' {...register("port")} defaultValue={465}>
             <option value={465}>465</option>
             <option value={587}>587</option>
           </select>
           </div>
 
           <div className='box'>
-            <label htmlFor="user">User</label>
-            <input {...register("user")} />
+            <label htmlFor="user">Email: </label>
+            <input className='input' {...register("user")} placeholder='Email' />
           </div>
 
           <div className='box'>
-            <label htmlFor="pass">Senha</label>
-            <input {...register("pass")} />
+            <label htmlFor="pass">Senha: </label>
+            <input className='input' {...register("pass")} placeholder='Senha' />
           </div>
         </div>
 
-        <div className='box'>
-          <label htmlFor="to">Destinatários</label>
-          <input type='file' {...register("to")} onChange={handleFileChange} />
+        <h2>Conteúdo</h2>
+        <div className='content'>
+          <div className='box'>
+            <label htmlFor="to">Destinatários: </label>
+            <input className='input' type='file' {...register("to")} onChange={handleFileChange} />
+          </div>
+          
+          <div className='box'>
+            <label htmlFor="subject">Assunto: </label>
+            <input className='input' id='subject' {...register("subject")} />
+          </div>
         </div>
         
-        <div className='box'>
-          <label htmlFor="subject">Assunto</label>
-          <input {...register("subject")} />
+        <div className='message'>
+          <div className='box' id='message-content'>
+            <label htmlFor="message">Mensagem: </label>
+            <input className='input' id='message-input' {...register("message")} />
+          </div>
         </div>
         
-        <div className='box'>
-          <label htmlFor="message">Mensagem</label>
-          <input {...register("message")} />
-        </div>
-        
-
         <input type="submit" value="Submit" />
       </form>
 

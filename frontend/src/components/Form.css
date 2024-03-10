@@ -1,18 +1,58 @@
 .form {
     height: auto;
-    background-color: #224957;
     align-items: center;
     text-align: center;
     display: flex;
     flex-direction: column;
+    color: #224957;
 }
 
-.sections {
+.configs {
     display: flex;
-    padding: 20px;
+    width: 100%;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.content {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    text-align: center;
 }
 
 .box {
     margin: 20px;
     padding: 10px;
+}
+
+.input {
+    background-color: #224957;
+    cursor: pointer;
+    color: #FFF;
+    border-radius: 0.375rem;
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    border-style: none;
+    width: 20rem;
+    height: 2rem;
+    padding: 8px;
+}
+
+#port {
+    background-color: #224957;
+    cursor: pointer;
+    color: #FFF;
+    border-radius: 0.375rem;
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    border-style: none;
+    width: 5rem;
+    height: 2rem;
+}
+
+#subject {
+    width: 30rem;
+}
+
+.message {
+    width: 100%;
 }
