@@ -1,3 +1,7 @@
+h1 {
+    color: #224957;
+}
+
 .form {
     height: auto;
     align-items: center;
@@ -55,4 +59,23 @@
 
 .message {
     width: 100%;
+    display: flex;
+    height: 30rem;
+}
+
+#message-content {
+    width: 100%;
+    display: flex;
+}
+
+#message-input {
+    width: 100%;
+    height: 100%;
+    margin-left: 4px;
+    font-size: medium;
+}
+
+.subtitles {
+    width: 100%;
+    display: flex;
 }

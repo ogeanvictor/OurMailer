@@ -53,9 +53,13 @@ function Form() {
 
   return (
     <>
-      <form className='form' onSubmit={handleSubmit(onSubmit)}>
+      <h1>OurMailer</h1>
 
-        <h2>Configuração</h2>
+      <form className='form' onSubmit={handleSubmit(onSubmit)}>
+        <div className='subtitles'>
+          <h2>Configuração</h2>
+        </div>
+        
         <div className='configs'>
           <div className='box'>
             <label htmlFor="host">Host: </label>
@@ -81,7 +85,10 @@ function Form() {
           </div>
         </div>
 
-        <h2>Conteúdo</h2>
+        <div className='subtitles'>
+          <h2>Conteúdo</h2>
+        </div>
+        
         <div className='content'>
           <div className='box'>
             <label htmlFor="to">Destinatários: </label>
@@ -97,7 +104,7 @@ function Form() {
         <div className='message'>
           <div className='box' id='message-content'>
             <label htmlFor="message">Mensagem: </label>
-            <input className='input' id='message-input' {...register("message")} />
+            <textarea className='input' id='message-input' {...register("message")} />
           </div>
         </div>
         
