@@ -92,6 +92,7 @@ h1 {
     background-color: #20DF7F;
     width: 30%;
     height: 3rem;
+    margin-bottom: 30px;
 }
 
 .button:hover {
