@@ -99,3 +99,25 @@ h1 {
     background-color: #19B366;
     color: white;
 }
+
+@media (max-width: 1290px) {
+    .subtitles {
+        width: 90%;
+    }
+    .box {
+        margin: 10px;
+    }
+    .configs {
+        width: 90%;
+        margin: 10px;
+    }
+    .message {
+        width: 90%;
+    }
+    .content {
+        width: 90%;
+    }
+    #message-input {
+        width: 90%;
+    }
+}
