@@ -47,7 +47,7 @@ class EmailService {
             from: emailBody.user,
             to: recipients,
             subject: emailBody.subject,
-            html: emailBody.message
+            text: emailBody.message
         };
 
         const emails = await this.createTransporter(emailBody.host, emailBody.port, emailBody.secure, emailBody.user, emailBody.pass).sendMail(mailOptions);
