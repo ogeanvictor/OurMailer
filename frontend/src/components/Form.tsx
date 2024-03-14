@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 import './Form.css';
 
 interface FormTypes {
@@ -104,7 +106,25 @@ function Form() {
         <div className='message'>
           <div className='box' id='message-content'>
             <label htmlFor="message">Mensagem: </label>
-            <textarea className='input' id='message-input' {...register("message")} />
+            <ReactQuill 
+              id='message-input'
+              className='quill'
+              modules={{
+                toolbar: {
+                  container: [
+                    [{ header: '1' }, { header: '2' }, { header: [3, 4, 5, 6] }, { font: [] }],
+                    [{ size: [] }],
+                    ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+                    [{ list: 'ordered' }, { list: 'bullet' }],
+                    ['link', 'video'],
+                    ['link', 'image', 'video'],
+                    ['clean'],
+                    ['code-block']
+                  ],
+                }
+              }} 
+            />
+            {/* <textarea className='input' id='message-input' {...register("message")} /> */}
           </div>
         </div>
         
