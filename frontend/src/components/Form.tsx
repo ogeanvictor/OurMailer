@@ -119,9 +119,7 @@ function Form() {
                     [{ size: [] }],
                     ['bold', 'italic', 'underline', 'strike', 'blockquote'],
                     [{ list: 'ordered' }, { list: 'bullet' }],
-                    ['link', 'video'],
                     ['link', 'image', 'video'],
-                    ['clean'],
                     ['code-block']
                   ],
                 }
