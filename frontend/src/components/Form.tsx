@@ -29,10 +29,6 @@ function Form() {
     }
   }
 
-  // const handleMessageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   setMessage(e.target.value)
-  // }
-
   const onSubmit = async (data: FormTypes) => {
     setLoading(true);
     data.port = Number(data.port)
@@ -131,7 +127,6 @@ function Form() {
                 }
               }} 
             />
-            {/* <textarea className='input' id='message-input' {...register("message")} /> */}
           </div>
         </div>
         
