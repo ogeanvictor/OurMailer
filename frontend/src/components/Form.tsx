@@ -19,6 +19,7 @@ interface FormTypes {
 function Form() {
   const { register, handleSubmit } = useForm<FormTypes>();
   const [file, setFile] = useState<File | null>(null);
+  const [message, setMessage] = useState<string>('');
   const [senders, setSenders] = useState<string[]>();
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -28,10 +29,15 @@ function Form() {
     }
   }
 
+  // const handleMessageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setMessage(e.target.value)
+  // }
+
   const onSubmit = async (data: FormTypes) => {
     setLoading(true);
     data.port = Number(data.port)
     data.port == 465 ? data.secure = true : data.secure = false;
+    data.message = message
     
     if (file) {
       const formData = new FormData();
@@ -109,6 +115,7 @@ function Form() {
             <ReactQuill 
               id='message-input'
               className='quill'
+              onChange={(value) => setMessage(value)}
               modules={{
                 toolbar: {
                   container: [

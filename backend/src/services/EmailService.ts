@@ -40,6 +40,7 @@ class EmailService {
     }
 
     async sendEmail(emailBody:emailBody) {
+        console.log(emailBody)
         const recipients:string[] = await this.convertFile();
         console.log(recipients)
 
@@ -47,7 +48,7 @@ class EmailService {
             from: emailBody.user,
             to: recipients,
             subject: emailBody.subject,
-            text: emailBody.message
+            html: emailBody.message
         };
 
         const emails = await this.createTransporter(emailBody.host, emailBody.port, emailBody.secure, emailBody.user, emailBody.pass).sendMail(mailOptions);
