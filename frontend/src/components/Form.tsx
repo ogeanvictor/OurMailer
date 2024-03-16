@@ -31,10 +31,10 @@ function Form() {
 
   const onSubmit = async (data: FormTypes) => {
     setLoading(true);
-    data.port = Number(data.port)
+    data.port = Number(data.port);
     data.port == 465 ? data.secure = true : data.secure = false;
-    data.message = message
-    
+    data.message = message;
+
     if (file) {
       const formData = new FormData();
       formData.append("file", file);
@@ -119,7 +119,7 @@ function Form() {
                     [{ size: [] }],
                     ['bold', 'italic', 'underline', 'strike', 'blockquote'],
                     [{ list: 'ordered' }, { list: 'bullet' }],
-                    ['link', 'image', 'video'],
+                    ['link', 'image'],
                     ['code-block']
                   ],
                 }
