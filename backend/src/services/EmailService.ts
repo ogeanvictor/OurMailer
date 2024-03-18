@@ -40,10 +40,12 @@ class EmailService {
     }
 
     async sendEmail(emailBody:emailBody) {
-        console.log(emailBody)
         const recipients:string[] = await this.convertFile();
-        console.log(recipients)
 
+        if (emailBody.message.includes("<img")) {
+            const match = emailBody.message.match(/<img.*?src="(.*?)"/);
+            console.log(match?.[1])
+        }
         const mailOptions = {
             from: emailBody.user,
             to: recipients,
