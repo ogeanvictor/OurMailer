@@ -44,8 +44,14 @@ class EmailService {
 
         if (emailBody.message.includes("<img")) {
             const match = emailBody.message.match(/<img.*?src="(.*?)"/);
-            console.log(match?.[1])
-        }
+
+            let image: Buffer;
+            if (match?.[1]) {
+                image = await this.convertToBuffer(match?.[1]);
+                console.log(image)
+            }
+        }             
+
         const mailOptions = {
             from: emailBody.user,
             to: recipients,
@@ -84,6 +90,11 @@ class EmailService {
 
     async deleteFile() {
         fs.unlinkSync(`${tempPath}recipients.csv`);
+    }
+
+    async convertToBuffer(image: string) {
+        const buffer = Buffer.from(image, 'utf8');
+        return buffer;
     }
 }
 
