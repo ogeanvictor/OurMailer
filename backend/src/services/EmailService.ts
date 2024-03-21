@@ -45,12 +45,15 @@ class EmailService {
         if (emailBody.message.includes("<img")) {
             const match = emailBody.message.match(/<img.*?src="(.*?)"/);
 
-            let image: Buffer;
             if (match?.[1]) {
-                image = await this.convertToBuffer(match?.[1]);
-                console.log(image)
-            }
-        }             
+                let data = match?.[1].replace(/^data:image\/\w+;base64,/, "");
+                let image = {
+                    buffer: await this.convertToBuffer(data)
+                }
+
+                await this.uploadImage(image.buffer);
+            };
+        };
 
         const mailOptions = {
             from: emailBody.user,
@@ -93,8 +96,12 @@ class EmailService {
     }
 
     async convertToBuffer(image: string) {
-        const buffer = Buffer.from(image, 'utf8');
+        const buffer = Buffer.from(image, 'base64');
         return buffer;
+    }
+
+    async uploadImage(image: Buffer) {
+        fs.writeFileSync(`${tempPath}image.png`, image);
     }
 }
 
