@@ -42,6 +42,13 @@ class EmailService {
     async sendEmail(emailBody:emailBody) {
         const recipients:string[] = await this.convertFile();
 
+        let mailOptions:Object = {
+            from: emailBody.user,
+            to: recipients,
+            subject: emailBody.subject,
+            html: emailBody.message
+        };
+
         if (emailBody.message.includes("<img")) {
             const match = emailBody.message.match(/<img.*?src="(.*?)"/);
 
@@ -53,17 +60,14 @@ class EmailService {
 
                 await this.uploadImage(image.buffer);
             };
-        };
 
-        const mailOptions = {
-            from: emailBody.user,
-            to: recipients,
-            subject: emailBody.subject,
-            html: emailBody.message,
-            attachments: [{
-                filename: 'image.png',
-                path: `${tempPath}image.png`
-            }]
+            mailOptions = {
+                ...mailOptions,
+                attachments: [{
+                    filename: 'image.png',
+                    path: `${tempPath}image.png`
+                }]
+            };
         };
 
         const emails = await this.createTransporter(emailBody.host, emailBody.port, emailBody.secure, emailBody.user, emailBody.pass).sendMail(mailOptions);
