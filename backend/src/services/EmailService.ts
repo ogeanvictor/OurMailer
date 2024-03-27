@@ -82,14 +82,14 @@ class EmailService {
         fs.createReadStream(`${tempPath}recipients.csv`)
         .pipe(parse({ delimiter: ",", from_line: 1}))
         .on("data", function(row) {
-            csvArray.push(row)
+            csvArray.push(row);
         })
         .on("end", function() {
             console.log("finish");
         })
         .on("error", function(error) {
             console.log(error);
-        })
+        });
 
         return csvArray;
     }
