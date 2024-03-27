@@ -15,14 +15,14 @@ Este disparador funciona somente com emails SMTP, e é preciso definir as config
 
 Para poder disparar emails é preciso setar algumas informações de configuração do seu email e servidor smtp.
 
-  - Host: O hostname do servidor smtp, como por exemplo (**smtp.gmail.com**)
+  - Host: O hostname do servidor smtp, como por exemplo (**smtp.gmail.com**).
   - Porta: A porta de conexão do servidor, por padrão a porta é **587** caso não é usado TLS para a conexão com o servidor e **465** caso for usado.
   - Email: Email que vai ser usado para disparar os emails.
   - Senha: Senha do email.
 
 E também, setar as informações de contéudo do email como por exemplo o destinatário, o assunto e conteúdo da mensagem.
-  - Destinatários: Deve ser inserido um arquivo `.csv` com os emails de quem você deseja enviar o seu email.
+  - Destinatários: Deve ser inserido um arquivo `.csv` com os emails dos seus destinatários.
   - Assunto: O assunto do seu email.
-  - Mensagem: A mensagem do seu email, podendo anexar imagem
+  - Mensagem: A mensagem do seu email podendo anexar imagem.
   
 ![screenshot](./assets/print.png)
