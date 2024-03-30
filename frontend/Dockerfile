@@ -13,6 +13,8 @@ RUN mkdir -p /var/www/html
 
 RUN mv dist/* /var/www/html
 
+VOLUME /var/www/html
+
 WORKDIR /
 
 RUN rm -rf /tmp/react
