@@ -1,0 +1,29 @@
+services:
+  backend:
+    container_name: backend
+    build: ./backend
+    restart: always
+    ports:
+      - 3001:3001
+
+  frontend:
+    container_name: frontend
+    build: ./frontend
+    depends_on:
+      - backend
+    volumes:
+      - frontend-volume:/var/www/html
+
+  nginx:
+    container_name: nginx
+    build: ./nginx
+    ports:
+      - 80:80
+    volumes:
+      - frontend-volume:/var/www/html
+    depends_on:
+      - backend
+      - frontend
+
+volumes:
+  frontend-volume:
