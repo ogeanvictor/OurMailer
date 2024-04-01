@@ -72,7 +72,7 @@ class EmailService {
 
         const emails = await this.createTransporter(emailBody.host, emailBody.port, emailBody.secure, emailBody.user, emailBody.pass).sendMail(mailOptions);
 
-        await this.deleteFile("recipients.csv");
+        await this.deleteFile();
         return `Message sent to: ${emails.envelope.to}`;
     }
 
@@ -99,8 +99,16 @@ class EmailService {
         return 'File saved!'
     }
 
-    async deleteFile(fileName: String) {
-        fs.unlinkSync(`${tempPath}${fileName}`);
+    async deleteFile() {
+        fs.readdir(tempPath, (error, files) => {
+            if (error) throw error;
+          
+            for (const file of files) {
+                fs.unlink(path.join(tempPath, file), (error) => {
+                    if (error) throw error;
+                });
+            }
+        });
     }
 
     async convertToBuffer(image: string) {
