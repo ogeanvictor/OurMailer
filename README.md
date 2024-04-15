@@ -1,6 +1,6 @@
 # OurMailer
 
-Esse projeto é um disparador de emails automáticos por meio de uma lista de destinatários (CSV), utilizando **TypeScript, NodeJS, Express e Nodemailer**.
+Esse projeto é um disparador de emails automáticos por meio de uma lista de destinatários (CSV), utilizando **TypeScript, NodeJS, Express, Nodemailer e ReactJs**.
 
 Este disparador funciona somente com emails SMTP, e é preciso definir as configurações do seu host.
 
